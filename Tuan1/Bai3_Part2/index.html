@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Comparison</title>
+</head>
+<body>
+    <script>
+        const BMI = (person) => {
+            try {
+                let bmi = person.mass / (person.height ** 2);
+                return parseFloat(bmi.toFixed(2)); 
+            } catch (error) {
+                console.log("Error", error);
+            }
+        };
+
+         function Person(name, mass, height) {
+            this.name = name;
+            this.mass = mass;
+            this.height = height;
+        }
+
+       const check = () => {
+            let john = new Person("John", 92, 1.68);
+            let mark = new Person("Mark", 78, 1.69);
+
+            let bmiJohn = BMI(john);
+            let bmiMark = BMI(mark);
+
+            if (bmiJohn > bmiMark) {
+                console.log(`${john.name}'s BMI (${bmiJohn}) is higher than ${mark.name}'s (${bmiMark})!`);
+            } else if (bmiMark > bmiJohn) {
+                console.log(`${mark.name}'s BMI (${bmiMark}) is higher than ${john.name}'s (${bmiJohn})!`);
+            } else {
+                console.log(`Both ${john.name} and ${mark.name} have the same BMI (${bmiJohn})!`);
+            }
+        };
+
+        check();
+    </script>
+</body>
+</html>
