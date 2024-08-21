@@ -3,11 +3,10 @@ function Team(name, scores) {
     this.scores = scores;
 }
 
-// Hàm tính điểm trung bình
 const averageScore = (team) => {
     const sumScore = team.scores.reduce((temp, score) => temp + score, 0);
     let averageScoreTeam = sumScore / team.scores.length;
-    return parseFloat(averageScoreTeam.toFixed(2)); // Chuyển đổi lại thành số thực
+    return parseFloat(averageScoreTeam.toFixed(2));
 };
 
 function determineMinScoreAndDraw() {
@@ -48,6 +47,5 @@ function determineMinScore() {
     }
 }
 
-// Chạy các hàm
 determineMinScore();
 determineMinScoreAndDraw();
