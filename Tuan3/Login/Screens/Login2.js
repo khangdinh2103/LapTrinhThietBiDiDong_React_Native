@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 export default function SecondScreen() {
   return (
+    //tuan 3
     <View style={styles.firstScreen}>
       <View>
         <Image source={require('./assets/vongtron.png')} />

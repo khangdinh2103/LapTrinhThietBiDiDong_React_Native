@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'rea
 
 export default function E() {
   return (
+    //tuan 3
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.d}>
         <View style={styles.container4}>
