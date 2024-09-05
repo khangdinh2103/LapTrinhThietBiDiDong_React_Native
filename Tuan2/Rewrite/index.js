@@ -11,6 +11,9 @@ Array.prototype.myfilter = function(callback) {
     });
     return result;
 };
+//in ket qua cua function rewrite
+console.log("fillter các số chẵn có trong mảng: ", arr.myfilter((element, index, array) => element % 2 == 0));
+
 
 let value = arr.myfilter((element, index, array) => element % 2 == 0);
 console.log("fillter các số chắn có trong mảng: ", value);
