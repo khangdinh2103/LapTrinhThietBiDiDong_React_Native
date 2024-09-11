@@ -4,13 +4,21 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const LoginScreen = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [login, setlogin] = useState(false);
+  const [login, setLogin] = useState('');
+
+  const handleLogin = () => {
+    setLogin('Đang đăng nhập...');
+    setTimeout(() => {
+      setLogin('');
+    }, 2000);
+  };
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>LOGIN</Text>
       
       <View style={styles.inputContainer}>
-        <Image source={require('./assets/usb.png')} />
+        <Icon name="user" size={20} color="#000" />
         <TextInput 
           style={styles.input}
           placeholder="Name"
@@ -31,14 +39,11 @@ const LoginScreen = () => {
 
       <TouchableOpacity 
         style={styles.button}
-        onPress={() => {
-              alert('Login Success');
-          }}>
-        <Text id='login' style={styles.buttonText}>LOGIN</Text>
-        
-          
-        
+        onPress={handleLogin}>
+        <Text style={styles.buttonText}>LOGIN</Text>
       </TouchableOpacity>
+
+      {login ? <Text style={styles.statusText}>{login}</Text> : null}
 
       <TouchableOpacity>
         <Text style={styles.createAccountText}>CREATE ACCOUNT</Text>
@@ -52,17 +57,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFD700', // Màu nền vàng
+    backgroundColor: '#FFD700',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 50,
   },
   inputContainer: {
+    borderWidth: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#FFD700',
     borderRadius: 10,
     paddingHorizontal: 10,
     marginBottom: 15,
@@ -92,6 +98,11 @@ const styles = StyleSheet.create({
     color: '#000',
     fontSize: 16,
     textDecorationLine: 'underline',
+  },
+  statusText: {
+    color: '#FF0000',
+    fontSize: 16,
+    marginBottom: 15,
   },
 });
 

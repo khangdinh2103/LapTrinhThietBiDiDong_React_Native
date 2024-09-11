@@ -8,9 +8,10 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>LOGIN</Text>
       
       <View style={styles.inputContainer}>
-        <Image source={require('./assets/usb.png')} />
+        <Icon name="user" size={20} color="#000" />
         <TextInput 
           style={styles.input}
           placeholder="Name"
@@ -57,12 +58,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginLeft: -180,
+    marginBottom: 50,
   },
   inputContainer: {
+    borderWidth: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    //'#FFD700' dam hon
+    backgroundColor: '#FFD700',
     borderRadius: 10,
     paddingHorizontal: 10,
     marginBottom: 15,
