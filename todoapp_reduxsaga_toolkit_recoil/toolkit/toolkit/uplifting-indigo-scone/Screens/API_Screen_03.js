@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image, SafeAreaView } from 'react-native';
-import { createJob, updateJob } from '../api'; // Import các hàm từ API
+import { View, TextInput, TouchableOpacity, Text, StyleSheet, Image, SafeAreaView, ActivityIndicator } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { createJob, updateJob } from '../components/redux/toolkit'; // Import các hành động từ Redux slice
 
 const Screen3 = ({ navigation, route }) => {
-  const { taskId, taskTitle, refreshJobs } = route.params || {};
+  const { taskId, taskTitle } = route.params || {};
   const [input, setInput] = useState(taskTitle || ''); // Sử dụng taskTitle nếu có
+  const [loading, setLoading] = useState(false); // Trạng thái loading
+  const dispatch = useDispatch();
 
   const handleFinish = async () => {
     if (!input) {
@@ -12,20 +15,23 @@ const Screen3 = ({ navigation, route }) => {
       return;
     }
 
+    setLoading(true); // Bắt đầu xử lý
+
     try {
       if (taskId) {
         // Cập nhật công việc nếu taskId đã có
-        await updateJob(taskId, input);
+        await dispatch(updateJob({ id: taskId, newTitle: input }));
       } else {
         // Thêm mới công việc
-        await createJob(input);
+        await dispatch(createJob(input));
       }
       setInput(''); // Xóa input sau khi hoàn thành
-      refreshJobs(); // Gọi hàm để làm mới danh sách công việc
       navigation.goBack(); // Quay lại màn hình trước
     } catch (error) {
       console.error('Lỗi khi lưu công việc:', error);
       alert('Không thể lưu công việc. Vui lòng thử lại.');
+    } finally {
+      setLoading(false); // Kết thúc xử lý
     }
   };
 
@@ -42,8 +48,12 @@ const Screen3 = ({ navigation, route }) => {
         value={input}
         onChangeText={(text) => setInput(text)}
       />
-      <TouchableOpacity style={styles.addButton} onPress={handleFinish}>
-        <Text style={styles.addButtonText}>Finish</Text>
+      <TouchableOpacity style={styles.addButton} onPress={handleFinish} disabled={loading}>
+        {loading ? (
+          <ActivityIndicator size="small" color="#fff" />
+        ) : (
+          <Text style={styles.addButtonText}>Finish</Text>
+        )}
       </TouchableOpacity>
     </SafeAreaView>
   );
